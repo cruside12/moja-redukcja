@@ -1,81 +1,65 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
 <title>Moja Redukcja</title>
 <style>
-:root{--bg:#f4f5f7;--card:#fff;--text:#111827;--muted:#6b7280;--accent:#111827;--ok:#16a34a;--line:#e5e7eb}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text);padding-bottom:32px}
-header{background:#111827;color:white;padding:22px 18px 18px;border-radius:0 0 24px 24px}
-h1{margin:0;font-size:28px} .sub{color:#d1d5db;margin-top:4px}
-.container{max-width:700px;margin:auto;padding:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.stat,.card{background:var(--card);border-radius:18px;padding:15px;box-shadow:0 2px 10px #0000000d}
-.stat b{display:block;font-size:21px}.stat span{font-size:12px;color:var(--muted)}
-.card{margin-top:12px}.card h2{font-size:18px;margin:0 0 10px}.meal{border-top:1px solid var(--line);padding:12px 0;display:flex;gap:10px;align-items:flex-start}.meal:first-of-type{border-top:0}
-.meal input{width:22px;height:22px;margin-top:2px}.meal b{font-size:15px}.meal small{display:block;color:var(--muted);margin-top:3px;line-height:1.35}
-button{border:0;background:var(--accent);color:#fff;padding:11px 14px;border-radius:12px;font-weight:600}
-.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.muted{color:var(--muted);font-size:13px}
-input[type=number],input[type=time]{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:white}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.progress{height:10px;background:#e5e7eb;border-radius:10px;overflow:hidden;margin:8px 0}.bar{height:100%;background:#111827;width:0}
-.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.nav button{background:white;color:#111827;border:1px solid var(--line)}
-.hidden{display:none}.notice{font-size:12px;color:var(--muted);line-height:1.4}
-</style>
-</head>
+:root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;padding-bottom:85px}
+header{background:#111827;color:#fff;padding:20px 16px 18px;border-radius:0 0 24px 24px}.wrap{max-width:760px;margin:auto;padding:0 14px}
+h1{margin:0;font-size:27px}.sub{color:#d1d5db;margin-top:4px}.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:5}.tabs button{border:0;background:#fff;color:#6b7280;padding:10px 2px;font-size:11px}.tabs button.active{color:#111827;font-weight:700}
+.screen{display:none;padding-top:12px}.screen.active{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat,.card{background:#fff;border-radius:18px;padding:15px;box-shadow:0 2px 10px #0000000b;margin-bottom:12px}.stat b{display:block;font-size:20px}.stat span,.muted{font-size:12px;color:var(--muted)}
+.card h2{margin:0 0 10px;font-size:18px}.meal{border-top:1px solid var(--line);padding:12px 0;display:flex;gap:10px}.meal:first-child{border-top:0}.meal input{width:21px;height:21px}.meal-main{flex:1}.meal-title{font-weight:700}.meal-desc{font-size:13px;color:var(--muted);line-height:1.4;margin-top:3px}
+button,.btn{border:0;background:var(--accent);color:#fff;border-radius:11px;padding:10px 13px;font-weight:650;cursor:pointer}.btn.secondary{background:#fff;color:#111827;border:1px solid var(--line)}.btn.danger{background:var(--red)}.btn.small{padding:7px 9px;font-size:12px}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.actions{display:flex;gap:6px;flex-wrap:wrap}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}textarea{min-height:75px;resize:vertical}
+.progress{height:9px;background:#e5e7eb;border-radius:20px;overflow:hidden}.bar{height:100%;background:#111827;width:0}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 2px;text-align:center;font-size:11px}.day.selected{background:#111827;color:#fff}.day b{display:block;font-size:14px}.pill{display:inline-block;background:#f3f4f6;padding:4px 7px;border-radius:999px;font-size:11px;margin:2px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:10}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px}.sheet h2{margin-top:0}
+.listitem{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}.notice{font-size:12px;color:var(--muted);line-height:1.45}
+</style></head>
 <body>
-<header><div class="container"><h1>Moja Redukcja</h1><div class="sub">Plan 1800 kcal • cel długoterminowy: 90 kg</div></div></header>
-<main class="container">
+<header><div class="wrap"><h1>Moja Redukcja</h1><div class="sub">1800 kcal • plan i kontrola redukcji</div></div></header>
+
+<main class="wrap">
+<section id="home" class="screen active">
 <div class="grid">
-<div class="stat"><b id="weight">121.0</b><span>kg dzisiaj</span></div>
-<div class="stat"><b id="remaining">1800</b><span>kcal pozostało</span></div>
-<div class="stat"><b id="protein">180</b><span>g białka celu</span></div>
+<div class="stat"><b id="wTop">121.0</b><span>kg</span></div><div class="stat"><b id="left">1800</b><span>kcal zostało</span></div><div class="stat"><b id="pTop">180</b><span>g białka celu</span></div>
 </div>
+<div class="card"><div class="row"><h2 style="margin:0">Dzisiaj</h2><button class="btn secondary small" onclick="go('days')">Zmień dzień</button></div><p class="muted" id="todayLabel"></p><div id="todayMeals"></div></div>
+<div class="card"><h2>Aktywność</h2><div class="two"><div><span class="muted">Kroki</span><input id="steps" type="number" min="0" step="500"></div><div><span class="muted">Cel kroków</span><input id="stepGoal" type="number" min="1000" step="500"></div></div><div class="progress" style="margin-top:10px"><div id="stepBar" class="bar"></div></div><div class="row"><span class="muted" id="stepText"></span><button class="btn small" onclick="openWorkout()">Trening</button></div></div>
+<div class="card"><h2>Dzisiejsze podsumowanie</h2><div id="summary"></div></div>
+</section>
 
-<div class="card">
-<h2>Dzisiaj — <span id="date"></span></h2>
-<div id="meals"></div>
-</div>
+<section id="days" class="screen">
+<div class="card"><h2>Plan na kolejne dni</h2><div class="calendar" id="calendar"></div></div>
+<div class="card"><div class="row"><h2 id="selectedDateTitle"></h2><button class="btn small" onclick="editDay()">Edytuj dzień</button></div><div id="selectedDayMeals"></div><div id="selectedWorkout"></div></div>
+</section>
 
-<div class="card">
-<h2>Aktywność</h2>
-<div class="two">
-<div><label class="muted">Kroki dzisiaj</label><input id="steps" type="number" min="0" step="500" value="0"></div>
-<div><label class="muted">Cel</label><input id="stepGoal" type="number" min="1000" step="500" value="10000"></div>
-</div>
-<div class="progress"><div class="bar" id="stepBar"></div></div>
-<div class="row"><span class="muted" id="stepText">0 / 10 000</span><span class="muted">kroków</span></div>
-</div>
+<section id="meals" class="screen">
+<div class="card"><h2>Jadłospis</h2><p class="notice">Możesz dodawać, usuwać i zmieniać posiłki. Zmiany zapisują się tylko na tym urządzeniu.</p><button onclick="newMeal()">+ Dodaj posiłek</button></div>
+<div id="mealManager"></div>
+</section>
 
-<div class="card">
-<h2>Waga</h2>
-<div class="two">
-<div><label class="muted">Wpisz dzisiejszą wagę</label><input id="weightInput" type="number" step="0.1" value="121"></div>
-<div style="display:flex;align-items:end"><button id="saveWeight" style="width:100%">Zapisz</button></div>
-</div>
-<p class="notice">Patrz przede wszystkim na trend i średnią z kilku dni, a nie na pojedynczy pomiar.</p>
-</div>
+<section id="progress" class="screen">
+<div class="card"><h2>Waga i postęp</h2><div class="two"><div><span class="muted">Dzisiejsza waga</span><input id="weightInput" type="number" step="0.1"></div><div><span class="muted">Cel wagi</span><input id="goalWeight" type="number" step="0.1"></div></div><button style="margin-top:9px" onclick="saveWeight()">Zapisz wagę</button><div id="weightHistory" style="margin-top:12px"></div></div>
+<div class="card"><h2>Ustawienia redukcji</h2><div class="two"><div><span class="muted">Kalorie</span><input id="calTarget" type="number" min="1000"></div><div><span class="muted">Białko (g)</span><input id="proteinTarget" type="number" min="50"></div></div><div class="two" style="margin-top:9px"><div><span class="muted">Cel kroków</span><input id="globalSteps" type="number" min="1000"></div><div><span class="muted">Godzina ważenia</span><input id="weighTime" type="time"></div></div><button style="margin-top:9px" onclick="saveSettings()">Zapisz ustawienia</button></div>
+</section>
 
-<div class="card">
-<h2>Przypomnienia</h2>
-<div class="two">
-<div><label class="muted">Śniadanie</label><input id="t1" type="time" value="08:00"></div>
-<div><label class="muted">Obiad</label><input id="t2" type="time" value="13:00"></div>
-<div><label class="muted">Przekąska</label><input id="t3" type="time" value="17:00"></div>
-<div><label class="muted">Kolacja</label><input id="t4" type="time" value="20:00"></div>
-</div>
-<button id="reminders" style="margin-top:10px;width:100%">Włącz przypomnienia</button>
-<p class="notice">Na iPhonie powiadomienia internetowe zależą od wersji iOS i sposobu instalacji PWA. Najpewniejsze są przypomnienia systemowe aplikacji natywnej; ta wersja działa bez App Store i bez konta.</p>
-</div>
-
-<div class="card">
-<h2>Trening</h2>
-<div id="workout"></div>
-</div>
+<section id="settings" class="screen">
+<div class="card"><h2>Przypomnienia</h2><p class="notice">Ustaw godziny. W wersji PWA iOS może ograniczać automatyczne lokalne alarmy. Możesz też użyć systemowej aplikacji Przypomnienia/Kalendarz.</p><div id="reminderFields"></div><button style="margin-top:9px" onclick="requestNotifications()">Włącz powiadomienia</button></div>
+<div class="card"><h2>Treningi</h2><button onclick="newWorkout()">+ Dodaj trening</button><div id="workoutManager" style="margin-top:10px"></div></div>
+<div class="card"><h2>Backup</h2><button onclick="exportData()">Eksportuj dane</button> <button class="btn secondary" onclick="importData()">Importuj dane</button><p class="notice">Eksport tworzy plik JSON z ustawieniami, jadłospisem, wagą i planem.</p></div>
+<div class="card"><h2>Reset</h2><button class="btn danger" onclick="resetApp()">Usuń wszystkie dane</button></div>
+</section>
 </main>
+
+<nav class="tabs">
+<button onclick="go('home')" data-tab="home" class="active">Dzisiaj</button><button onclick="go('days')" data-tab="days">Dni</button><button onclick="go('meals')" data-tab="meals">Posiłki</button><button onclick="go('progress')" data-tab="progress">Postęp</button><button onclick="go('settings')" data-tab="settings">Więcej</button>
+</nav>
+
+<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
+<input id="fileImport" type="file" accept=".json" style="display:none">
+
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>
